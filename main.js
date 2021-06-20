@@ -35,6 +35,4 @@ function SendRequest(un, pw) {
         .then(response => response.text())
         .then(result => console.log(result))
         .catch(error => console.log('error', error));
-    console.log(response);
-
 }

@@ -1,9 +1,9 @@
 body {
-    font-family: "Roboto", system-ui;
-    background: #fff;
-    height: 100vh;
+    font-family: "Lato", system-ui;
+    background: url('images/webb-dark.png');
     text-align: center;
     font-size: 32px;
+    line-height: 1.5;
 }
 
 h1 {
@@ -17,6 +17,38 @@ input {
     text-align: center;
 }
 
+label {
+    color: #fff
+}
+
+a {
+    color: #fff;
+}
+
+a:visited {
+    color: #aaa;
+}
+
+output {
+    color: #fff;
+}
+
 #chats_list {
     font-size: 12px;
+}
+
+#logo {
+    display: block;
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    width: 200px;
+    height: 200px;
+}
+
+#aidan {
+    position: fixed;
+    bottom: 0px;
+    right: 0px;
+    font-size: 10px;
 }

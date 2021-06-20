@@ -50,7 +50,7 @@ function sendRequest(un, pw) {
     function createChatList(result) {
         document.getElementById('chats_list').innerHTML = "";
         for (let i = 0; i < JSON.parse(result).chats.length; i++) {
-            let id = JSON.parse(result).chats[i].id;
+            let id = JSON.parse(result).chats[i].thread.id;
             document.getElementById('chats_list').innerHTML += '<a href="https://my.staging.livechatinc.com/archives/' + id + '" target="_blank">' + id + '</a><br>';
         }
     }

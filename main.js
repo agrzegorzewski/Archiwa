@@ -35,11 +35,11 @@ function sendRequest(un, pw) {
     const call = fetch("https://api.livechatinc.com/v3.3/agent/action/list_archives", requestOptions)
         .then(response => response.text())
         .then(result => {
-            console.log(JSON.parse(result));
+            // console.log(JSON.parse(result));
             setLeftChats(result);
             createChatList(result);
-            console.log('found chats ' + JSON.parse(result).found_chats);
-            console.log('chats length ' + JSON.parse(result).chats.length);
+            // console.log('found chats ' + JSON.parse(result).found_chats);
+            // console.log('chats length ' + JSON.parse(result).chats.length);
         })
         .catch(error => console.log('error', error));
 
@@ -50,7 +50,7 @@ function sendRequest(un, pw) {
     function createChatList(result) {
         document.getElementById('chats_list').innerHTML = "";
         for (let i = 0; i < JSON.parse(result).chats.length; i++) {
-            let id = JSON.parse(result).chats[i].thread.id;
+            let id = JSON.parse(result).chats[i].id;
             document.getElementById('chats_list').innerHTML += '<a href="https://my.staging.livechatinc.com/archives/' + id + '" target="_blank">' + id + '</a><br>';
         }
     }

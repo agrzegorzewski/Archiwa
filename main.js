@@ -7,6 +7,7 @@ function sendRequest(un, pw) {
     myHeaders.append("Authorization", token);
 
     var raw = JSON.stringify({
+        "limit": 100,
         "filters": {
             "tags": {
                 "exclude_values": [
@@ -21,17 +22,13 @@ function sendRequest(un, pw) {
                     ""
                 ]
             },
-        },
-        "limit": 100
+        }
     });
-
-    //raw.filters.agents.values = [document.getElementById('email').value];
-    console.log(raw);
 
     var requestOptions = {
         method: 'POST',
         headers: myHeaders,
-        body: raw,
+        body: raw.replace('""', `"${document.getElementById('email').value}"`),
         redirect: 'follow'
     };
 
@@ -51,6 +48,7 @@ function sendRequest(un, pw) {
     }
 
     function createChatList(result) {
+        document.getElementById('chats_list').innerHTML = "";
         for (let i = 0; i < JSON.parse(result).chats.length; i++) {
             let id = JSON.parse(result).chats[i].id;
             document.getElementById('chats_list').innerHTML += '<a href="https://my.staging.livechatinc.com/archives/' + id + '" target="_blank">' + id + '</a><br>'

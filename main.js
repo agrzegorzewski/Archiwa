@@ -12,8 +12,8 @@ function sendRequest(un, pw) {
         redirect: 'follow'
     };
 
+    console.log(createBody());
     makeCall(requestParameters);
-
 }
 
 function setLeftChats(result) {
@@ -38,23 +38,27 @@ function makeCall(requestOptions) {
         .catch(error => console.log('error', error));
 }
 
-function addDateToBody(date_from_input, date_to_input, requestBody) {
+function addDateToBody(dateFromInput, dateToInput, requestBody) {
 
-    const date_from = new Date(date_from_input);
-    const date_to = new Date(date_to_input);
+    const dateFrom = new Date(dateFromInput);
+    const dateTo = new Date(dateToInput);
 
-    if (Boolean(date_from_input) !== Boolean(date_to_input)) {
+    if (Boolean(dateFromInput) !== Boolean(dateToInput)) {
         return alert('Only one date included.');
     }
-    if (date_from >= date_to) {
+    if (dateFrom >= dateTo) {
         return alert('"Date from" is bigger than or equal "date to".')
     }
-    if (!date_from_input) {
+    if (!dateFromInput) {
         return requestBody;
     }
 
-    requestBody.filters.from = date_from;
-    requestBody.filters.to = date_to;
+    dateTo.setHours(23);
+    dateTo.setMinutes(59);
+    dateTo.setSeconds(59);
+
+    requestBody.filters.from = addMilisecondsToDateString(dateFrom.toISOString());
+    requestBody.filters.to = addMilisecondsToDateString(dateTo.toISOString());
 
     return requestBody;
 }
@@ -82,4 +86,8 @@ function createBody() {
     raw.filters.agents.values[0] = document.getElementById('email').value;
 
     return JSON.stringify(addDateToBody(document.getElementById('date_from').value, document.getElementById('date_to').value, raw));
+}
+
+function addMilisecondsToDateString(dateString) {
+    return dateString.slice(0, -1) + "000Z";
 }

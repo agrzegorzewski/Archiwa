@@ -12,7 +12,6 @@ function sendRequest(un, pw) {
         redirect: 'follow'
     };
 
-    console.log(createBody());
     makeCall(requestParameters);
 }
 
